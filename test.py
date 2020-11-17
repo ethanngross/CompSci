@@ -1,3 +1,3 @@
 print("hello")
 print("your mum")
-123456
+1234
