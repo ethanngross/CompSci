@@ -3,33 +3,34 @@
 import tkinter as tk
 import turtle as trtl
 from PIL import ImageGrab, Image, ImageDraw
-
-message = "changeme" # Change this to encode a different message. Length limit 20 characters.
-
+#message that is going to be encoded
+message = input("Enter message: ") # Change this to encode a different message. Length limit 20 characters.
+str(message)
+#take in message and seperate characters into different ints from ascii chart
 characters_as_ints = []
 for cha in message:
   characters_as_ints.append(ord(cha))
 print(characters_as_ints)
-
+#take in ints and store in array as bytes
 characters_as_bits = []
 for integ in characters_as_ints:
   characters_as_bits.append('{0:08b}'.format(integ))
 print(characters_as_bits)
-
+#sperate each byte into bits in an array
 bits_as_ints = []
 for index in range(0,len(characters_as_bits)):
   for bit in characters_as_bits[index]:
     bits_as_ints.append(bit)
 print(bits_as_ints)
-
+#create turtle
 screen = trtl.getscreen()
 drawer = trtl.Turtle()
-
+#set up turtle 
 drawer.penup()
 drawer.goto(-200,221)
 drawer.shape("square")
-drawer.color("blue")
-
+drawer.color("green")
+#draw out the picture according to the message entered
 message_length = len(bits_as_ints)
 index = 0
 while index < message_length:
@@ -39,7 +40,7 @@ while index < message_length:
     drawer.stamp()
   drawer.forward(21)
   index = index + 1
-
+#more screen setup
 screen = drawer.getscreen()
 root = trtl.getcanvas().winfo_toplevel()
 
@@ -58,7 +59,7 @@ def draw_message(im_size, x, y):
       x += 21
       index = index + 1
     im.save("macOutput.gif")
-
+#creates a screenshot of the encoded code
 def create_image(widget):
     x=root.winfo_rootx()
     y=root.winfo_rooty()

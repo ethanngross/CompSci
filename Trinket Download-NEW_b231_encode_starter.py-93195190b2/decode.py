@@ -2,14 +2,14 @@
 #   Note this will not run in the code editor and must be downloaded
 #   If using a macOS device, change im to open "macOutput.gif"
 from PIL import Image 
-
+#stores coded image
 im = Image.open("output.gif")
 rgb_im = im.convert('RGB')
-
+#setting variable numbers
 MAX_CHARACTERS = 20
 BITS_IN_A_BYTE = 8
 MAX_BITS = MAX_CHARACTERS * BITS_IN_A_BYTE
-
+#full array of zeroes
 my_array = []
 for letters in range(0,MAX_BITS):
   my_array.append(0)
@@ -24,7 +24,7 @@ pos=0
 for i in range(UPPER_PIXEL_ROW,LOW_PIXEL_ROW,DISTANCE_BETWEEN_BLOCKS):
   for j in range(LEFT_PIXEL_COL,RIGHT_PIXEL_COL,DISTANCE_BETWEEN_BLOCKS):
     r,g,b = rgb_im.getpixel((j,i))
-    if g < 254: #the white pixels have green values of 254, blue have less
+    if b < 254: #the white pixels have green values of 254, blue have less
       my_array[pos]=1
     pos = pos + 1
 print(my_array)
@@ -33,7 +33,7 @@ message_as_bits = ''
 for bit in my_array:
   message_as_bits = message_as_bits + str(bit)
 print(message_as_bits)
-
+#figures out letters based on binary and prints decoded message
 letter = 0
 decoded = ''
 for n in range(0,MAX_BITS):
